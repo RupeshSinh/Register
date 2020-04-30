@@ -1,56 +1,53 @@
-<?php    
-echo"<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset='utf-8'>
-    <meta name='viweport' content='width=device-width', initial-scale=1>
-    <link rel='stylesheet' href='bootstrap.min.css' >
+    <head>
+        
+        <meta charset='utf-8'>
+        
+        <meta name='viweport' content='width=device-width', initial-scale=1>
+        
+        <link rel='stylesheet' href='bootstrap.min.css' >
+        
+        <script>
+            function read() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange=function() {
+                    if (this.status==200)
+                    {
+                        document.getElementById("demo").innerHTML = this.responseText;
+                    }
+                };
+                xhttp.open("GET", "read.php" , true );
+                xhttp.send();
+            }
     
-
-</head>
+        </script>
+    </head>
+    
     <body>
-        <h1 class='text-center text-primary'>Welcome</h1>
-        <table border='3' align='center' cellpadding='30px'>       
-            <tr>
-                <td><a href='insert.php'>CREATE</a>
-              </tr>
-        </table>
+        
+        <h1 class='text-center text-danger '>Welcome</h1>
+        
+        
+        <div class="row justify-content-center">
+             <p class="text-success">FOR CREATING PROFILE CLICK ON CREATE.</p>
+        </div>
+
+        
+        <h3 class='text-center text-primary'>
+             <a href='insert.php'><button>CREATE</button></a>
+        </h3>
+        
+        <div class="row justify-content-center text-primary">
+            <p>FOR READING PROFILE CLICK ON READ.</p>
+        </div>
+        
+        <div class="row justify-content-center">
+            <input type="button" name="read" onclick="read()" value="Read" class="btn btn-primary btn-lg">
+        </div>
+        
+        <div id="demo"></div>
+
+        
     </body>
 </html>
-";
-
-echo"<h1 class='text-center text-success'>Profiles</h1>";
-
-$con=mysqli_connect("localhost","root","","office");
-
-$rs=mysqli_query($con,"SELECT * FROM employes");
-    
-    echo"<table border='3' align='center' cellpadding='30px'>";
-    echo"<tr><td>ID</td>";
-    echo"<td>First Name</td>";
-    echo"<td>Last Name</td>";
-    echo"<td>Email Id</td>";
-    echo"<td>Phone Number</td>";
-    echo"<td>Address</td>";
-    echo"<td>Profile Photo</td>";
-    echo"<td>Delete</td>";
-    echo"<td>Update</td></tr>";
-
-
-while($row=mysqli_fetch_array($rs))
-{
-    echo"<tr><td>".$row["id"];
-    echo"<td>".$row["first_name"];
-    echo"<td>".$row["last_name"];
-    echo"<td>".$row["email"];
-    echo"<td>".$row["mobile"];
-    echo"<td>".$row["address"];
-    echo"<td><img src=' images/ ".$row["image"]."'               height='100px' width='100px'></td>";
-    
-    echo"<td><a href=delete.php?d=".$row["id"].">DELETE</a>";
-    echo"<td><a href=update.php?u=".$row["id"].">UPDATE</a></tr>";
-    
-   
-}
-
-?>
